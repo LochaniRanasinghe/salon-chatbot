@@ -1,59 +1,200 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Glow Salon & Spa - AI Chatbot
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A modern, intelligent chatbot application built with Laravel for **Glow Salon & Spa**. The chatbot enables customers to inquire about services, pricing, working hours, location, and book appointments seamlessly through a responsive web interface.
 
-## About Laravel
+## 🎯 Project Overview
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This is an automated customer service solution designed specifically for salon and spa businesses. The chatbot uses AI to handle common customer inquiries, reducing manual support burden while providing instant responses 24/7.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Key Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Real-time Chat Interface** — Beautiful, responsive UI with gradient styling
+- **AI-Powered Responses** — Intelligent chatbot service for salon-related queries
+- **Session Management** — Track conversation history per user
+- **Quick Actions** — One-click buttons for common questions (Prices, Hours, Location, Booking)
+- **Typing Indicators** — Animated typing feedback for better UX
+- **Error Handling** — Graceful fallback with support contact info
+- **CSRF Protection** — Secure POST requests with Laravel CSRF tokens
 
-## Learning Laravel
+## 🛠️ Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **Backend:** Laravel 12.54.1 PHP
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript (Async/Await)
+- **Database:** MySQL/SQLite (for chat history & user data)
+- **Build Tool:** Vite (for asset compilation)
+- **Testing:** PHPUnit
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📁 Project Structure
 
-## Laravel Sponsors
+```
+salon-chatbot/
+├── app/
+│   ├── Http/Controllers/      # Chat controller for handling requests
+│   ├── Models/               # User & chat models
+│   └── Services/             # SalonChatbotService (AI logic)
+├── resources/
+│   ├── views/
+│   │   └── chatbot.blade.php  # Main chat UI (with embedded JS)
+│   ├── css/                   # Styling
+│   └── js/                    # Frontend scripts
+├── routes/
+│   └── web.php               # Chat endpoints
+├── database/
+│   ├── migrations/           # Table schemas
+│   ├── factories/            # Test data generators
+│   └── seeders/              # Database seeds
+└── config/                   # App configuration
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Getting Started
 
-### Premium Partners
+### Installation
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+1. **Clone the repository**
 
-## Contributing
+    ```bash
+    git clone <repo-url>
+    cd salon-chatbot
+    ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. **Install dependencies**
 
-## Code of Conduct
+    ```bash
+    composer install
+    npm install
+    ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. **Set up environment**
 
-## Security Vulnerabilities
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4. **Configure database** in `.env` and run migrations
 
-## License
+    ```bash
+    php artisan migrate
+    ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. **Build assets**
+
+    ```bash
+    npm run build
+    ```
+
+6. **Start the server**
+    ```bash
+    php artisan serve
+    ```
+
+Visit `http://localhost:8000` to access the chatbot.
+
+## 🔌 API Endpoints
+
+| Method | Endpoint      | Description                              |
+| ------ | ------------- | ---------------------------------------- |
+| `POST` | `/chat/send`  | Send a user message and get bot response |
+| `POST` | `/chat/clear` | Clear chat history for current session   |
+
+### Request Example (POST /chat/send)
+
+```javascript
+fetch("/chat/send", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-TOKEN": csrfToken,
+    },
+    body: JSON.stringify({ message: "What are your prices?" }),
+});
+```
+
+### Response Example
+
+```json
+{
+    "reply": "Our salon offers prices ranging from $25-$150 depending on services..."
+}
+```
+
+## 💻 How the Chat Works
+
+1. **User sends message** → `sendMessage()` captures input
+2. **Show typing animation** → Visual feedback while processing
+3. **API request** → POST to `/chat/send` with CSRF token
+4. **Backend processing** → `SalonChatbotService` generates AI response
+5. **Display bot reply** → Message appended and auto-scrolled into view
+6. **Error handling** → Displays fallback message with salon phone number
+
+## 🎨 UI Components
+
+### Message Bubbles
+
+- **User messages:** Right-aligned, pink-purple gradient background
+- **Bot messages:** Left-aligned, white with border
+
+### Quick Action Buttons
+
+Pre-set queries for:
+
+- Prices
+- Book Appointment
+- Working Hours
+- Location
+
+### Features
+
+- Auto-scroll to latest message
+- Disabled send button while loading
+- Animated typing indicator
+- Clear chat button
+- Online status indicator
+
+## 📝 Code Highlights
+
+### Async/Await Pattern
+
+The frontend uses modern JavaScript async/await for clean, non-blocking API calls:
+
+```javascript
+async function sendMessage() {
+    const response = await fetch('/chat/send', {...});
+    const data = await response.json();
+    appendMessage(data.reply, 'bot');
+}
+```
+
+### Service Layer
+
+Backend logic is encapsulated in `SalonChatbotService.php`:
+
+- Processes user queries
+- Generates contextual responses
+- Manages conversation state
+
+## 🔐 Security
+
+- ✅ CSRF token validation on all POST requests
+- ✅ Input sanitization via `textContent` (prevents XSS)
+- ✅ Secure JSON responses from backend
+
+## 📞 Support
+
+For salon inquiries, customers can call: **011-2345678**
+
+## 🤖 AI Model
+
+This chatbot is powered by **Google Gemini API**, which provides intelligent, context-aware responses to customer inquiries. The integration allows for natural language understanding and generation, making conversations feel human-like and helpful.
+
+## 📌 Sample Project
+
+This is a **sample project** demonstrating how to build an AI-powered chatbot for service-based businesses using Laravel and Google Gemini. Feel free to fork, modify, and adapt it for your own salon, spa, or service business!
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+**Built with ❤️ for Glow Salon & Spa**
